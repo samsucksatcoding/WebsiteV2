@@ -1,0 +1,181 @@
+body {
+    background-color: #333;
+    color: #fff;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    font-family: monospace;
+    font-size: 15px;
+}
+a {
+    color: #4955ff;
+    font-weight: bold;
+    text-decoration: none;
+    position: relative;
+}
+a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: currentColor; /* or use #4955ff */
+    transition: width 0.3s ease, left 0.3s ease;
+}
+a:hover::after {
+    width: 100%;
+    left: 0;
+}
+.container main{
+    padding: 15px;
+}
+.container {
+    width: 1440px;
+    border: 2.5px solid #888;
+    margin: 25px auto;
+    padding-top: 15px;
+    position: relative;
+}
+.topbar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: rgba(0, 0, 0, 0.01);
+    backdrop-filter: blur(15px);
+    border-bottom: 2px solid #555;
+    z-index: 1000;
+    margin: 0 auto;
+}
+.topbar .left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.topbar .left img {
+    height: 40px;
+    width: auto;
+}
+.topbar .left h3 {
+    margin: 0;
+    cursor: pointer;
+    font-size: 20px;
+    color: #fff;
+    transition: color 0.3s ease;
+}
+.topbar .left h3:hover {
+    color: #4955ff;
+}
+.topbar .right {
+    display: flex;
+    gap: 20px;
+}
+h1 {
+    display: inline;
+    font-size: 48px;
+}
+.bounce-underlined {
+    display: inline-block;
+    font-weight: bold;
+    white-space: nowrap;
+}
+.bounce-underlined span {
+    display: inline-block;
+    position: relative;
+    animation: float 2s ease-in-out infinite;
+}
+.bounce-underlined span::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    height: 4px;
+    width: 100%;
+    background: linear-gradient(to right, #ff55ff, #4955ff);
+    background-size: 1100% 100%;
+    background-repeat: no-repeat;
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: underlineDraw 0.4s ease forwards;
+}
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+@keyframes underlineDraw {
+    to { transform: scaleX(1); }
+}
+.bounce-underlined span:nth-child(1)  { animation-delay: 0s; }
+.bounce-underlined span:nth-child(2)  { animation-delay: 0.1s; }
+.bounce-underlined span:nth-child(3)  { animation-delay: 0.2s; }
+.bounce-underlined span:nth-child(4)  { animation-delay: 0.3s; }
+.bounce-underlined span:nth-child(5)  { animation-delay: 0.4s; }
+.bounce-underlined span:nth-child(6)  { animation-delay: 0.5s; }
+.bounce-underlined span:nth-child(7)  { animation-delay: 0.6s; }
+.bounce-underlined span:nth-child(8)  { animation-delay: 0.7s; }
+.bounce-underlined span:nth-child(9)  { animation-delay: 0.8s; }
+.bounce-underlined span:nth-child(10) { animation-delay: 0.9s; }
+.bounce-underlined span:nth-child(11) { animation-delay: 1s; }
+.bounce-underlined span:nth-child(1)::after  { background-position: 0% 0; }
+.bounce-underlined span:nth-child(2)::after  { background-position: 10% 0; }
+.bounce-underlined span:nth-child(3)::after  { background-position: 20% 0; }
+.bounce-underlined span:nth-child(4)::after  { background-position: 30% 0; }
+.bounce-underlined span:nth-child(5)::after  { background-position: 40% 0; }
+.bounce-underlined span:nth-child(6)::after  { background-position: 50% 0; }
+.bounce-underlined span:nth-child(7)::after  { background-position: 60% 0; }
+.bounce-underlined span:nth-child(8)::after  { background-position: 70% 0; }
+.bounce-underlined span:nth-child(9)::after  { background-position: 80% 0; }
+.bounce-underlined span:nth-child(10)::after { background-position: 90% 0; }
+.bounce-underlined span:nth-child(11)::after { background-position: 100% 0; }
+/* Ngl this is a large chunk, this note is for me to find where this shit ends 😭*/
+.invisible{
+    border-color: #11111100;
+    color: #11111100;
+    background-color: #11111100;
+}
+.extrainfo {
+    color: #777;
+}
+.copy-paste-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+textarea {
+    flex-grow: 1;
+    height: auto;
+    padding: 10px;
+    border: 2px solid #555;
+    border-radius: 5px;
+    background-color: #444;
+    color: #fff;
+    font-family: monospace;
+    font-size: 15px;
+    resize: none;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+textarea:focus {
+    border-color: #4955ff;
+    background-color: #333;
+    outline: none;
+}
+button.copypaste {
+    padding: 10px 15px;
+    background-color: #4955ff;
+    color: #fff;
+    border: 2px solid #4955ff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+button.copypaste:hover {
+    background-color: #3240ff;
+    border-color: #3240ff;
+}

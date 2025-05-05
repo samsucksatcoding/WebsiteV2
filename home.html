@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <title>Home @ VioletRoots' &lt;Studio&gt;</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="topbar">
+                <div class="left">
+                    <img src="./images/logo.png" alt="VioletRoots' Logo">
+                    <h3 onclick="window.location.href='./index.html'">VioletRoots' &lt;Studio&gt;</h3>
+                </div>
+                <div class="right">
+                    <a href="./home.html">Home</a>
+                    <a href="./sitemap.html">Sitemap</a>
+                </div>
+            </div>
+            <main>
+                <h1>Hey! I'm <span class="bounce-underlined">VioletRoots</span></h1>
+                <hr class="invisible">
+                <p class="extrainfo">she/her / violetroots@cloudflare / en_US.UTF-8 / America/U.S.A</p>
+                <hr class="invisible">
+                <p>I'm some dumb 15 year old with unrestricted internet access.<br>
+                    So yes I make websites. I might get into cybersecurity ngl...</p>
+                <hr class="invisible">
+                <div class="innerblock">
+                    <h3 class="blocktitle">My Button</h3>
+                    <a href="https://violetroots.pages.dev/index.html"><img src="./button.png" alt="VioletRoots">
+                    <div class="copy-paste-box">
+                        <textarea rows="1" cols="51">&lt;a href="https://violetroots.pages.dev/index.html"&gt;&lt;img src="./button.png" alt="VioletRoots"&gt;</textarea>
+                        <button class="copypaste">Copy 📋</button>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <script>
+            const h1 = document.querySelector('.bounce-underlined');
+            const text = h1.textContent;
+            h1.innerHTML = [...text].map(char =>
+              `<span>${char === ' ' ? '&nbsp;' : char}</span>`).join('');
+          </script>
+          <script>
+            document.querySelector('.copypaste').addEventListener('click', function() {
+                const textarea = document.querySelector('textarea');
+                textarea.select();
+                textarea.setSelectionRange(0, 99999);
+                document.execCommand('copy');
+                this.textContent = 'Copied! ✅';
+                setTimeout(() => {
+                    this.textContent = 'Copy 📋';
+                }, 2000);
+            });
+        </script>        
+    </body>
+</html>

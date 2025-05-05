@@ -1,0 +1,40 @@
+body {
+    background-color: #333;
+    color: #fff;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: monospace;
+}
+.container {
+    max-width: 60ch;
+    text-align: center;
+}
+.small {
+    font-size: 11px;
+}
+.right {
+    margin-left: 250px;
+}
+a {
+    color: #4955ff;
+    font-weight: bold;
+    text-decoration: none;
+    position: relative;
+}
+a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: currentColor; /* or use #4955ff */
+    transition: width 0.3s ease, left 0.3s ease;
+}
+a:hover::after {
+    width: 100%;
+    left: 0;
+}
