@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="style.css">
         <!--Privacy Friendly Site analytics. Visit here: https://us.umami.is/websites/eee30983-6845-4b33-8573-e3265ed39f17 -->
         <script defer src="https://cloud.umami.is/script.js" data-website-id="eee30983-6845-4b33-8573-e3265ed39f17"></script>
+        <script defer src="./scripts.js"></script>
     </head>
     <body>
         <div class="container">
@@ -40,26 +41,8 @@
                 <a href="https://thinliquid.dev"><img src="https://thinliquid.dev/thnlqd.png" alt="thinliquid's button" width="88" height="31" /></a>
                 <a href="https://okt.nekoweb.org"><img src="https://okt.nekoweb.org/assets/pics/okt_button.gif"></a>
                 <a href="https://reduxflakes.nekoweb.org"><img src="https://reduxflakes.nekoweb.org/public/img/buttons/reduc_anim.gif"></a>
-
+                <a href="https://madjikware.com/"><img src="https://madjikware.com/img/mj.png" alt="MIRWR Website"></a>
             </main>
         </div>
-        <script>
-            const h1 = document.querySelector('.bounce-underlined');
-            const text = h1.textContent;
-            h1.innerHTML = [...text].map(char =>
-              `<span>${char === ' ' ? '&nbsp;' : char}</span>`).join('');
-          </script>
-          <script>
-            document.querySelector('.copypaste').addEventListener('click', function() {
-                const textarea = document.querySelector('textarea');
-                textarea.select();
-                textarea.setSelectionRange(0, 99999);
-                document.execCommand('copy');
-                this.textContent = 'Copied! ✅';
-                setTimeout(() => {
-                    this.textContent = 'Copy 📋';
-                }, 2000);
-            });
-        </script>        
     </body>
 </html>

@@ -1,11 +1,23 @@
 body {
-    background-color: #333;
-    color: #fff;
-    height: 100vh;
     margin: 0;
-    display: flex;
-    font-family: monospace;
+    height: 100vh;
+    background-color: #111;  /* Dark background like terminal */
+    background-image: 
+      linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px), /* Vertical grid */
+      linear-gradient(180deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px); /* Horizontal grid */
+    background-size: 30px 30px;  /* Grid cell size */
+    background-attachment: fixed;
+    transition: background-position 0.1s ease-out;
+    color: #fff;  /* Text color for a terminal-like look */
+    font-family: monospace;  /* Monospace font for the terminal appearance */
     font-size: 15px;
+    display: flex;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+img {
+    -webkit-user-drag: none;
 }
 a {
     color: #4955ff;
@@ -26,6 +38,9 @@ a::after {
 a:hover::after {
     width: 100%;
     left: 0;
+}
+.container{
+    backdrop-filter: blur(3px)
 }
 .container main{
     padding: 15px;
@@ -153,7 +168,7 @@ textarea {
     padding: 10px;
     border: 2px solid #555;
     border-radius: 5px;
-    background-color: #444;
+    background-color: #11111100;
     color: #fff;
     font-family: monospace;
     font-size: 15px;
@@ -163,7 +178,7 @@ textarea {
 }
 textarea:focus {
     border-color: #4955ff;
-    background-color: #333;
+    background-color: #11111100;
     outline: none;
 }
 button.copypaste {
@@ -187,13 +202,14 @@ button.copypaste:hover {
     position: relative;
 }
 .innerblock:hover {
+    backdrop-filter: blur(15px);
     transform: scale(1.01);
 }
 .blocktitle {
     position: absolute;
     top: -12px;
     left: 20px;
-    background-color: #333;
+    backdrop-filter: blur(1px);
     padding: 5px 10px;
     border: 2px solid #777;
     margin: 0;
