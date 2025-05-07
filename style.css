@@ -216,3 +216,12 @@ button.copypaste:hover {
     max-width: none;
     font-size: 16px;
 }
+.cursor {
+    display: inline-block;
+    opacity: 1;
+    animation: smooth-blink .5s ease-in-out infinite;
+}
+@keyframes smooth-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
