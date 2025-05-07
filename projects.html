@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <title>Home @ VioletRoots' &lt;Studio&gt;</title>
+        <link rel="stylesheet" href="style.css">
+        <!--Privacy Friendly Site analytics. Visit here: https://us.umami.is/websites/eee30983-6845-4b33-8573-e3265ed39f17 -->
+        <script defer src="https://cloud.umami.is/script.js" data-website-id="eee30983-6845-4b33-8573-e3265ed39f17"></script>
+        <script defer src="./scripts.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="topbar">
+                <div class="left">
+                    <img src="./images/logo.png" alt="VioletRoots' Logo">
+                    <h3 onclick="window.location.href='./index.html'">VioletRoots' &lt;Studio&gt;</h3>
+                </div>
+                <div class="right">
+                    <a href="./home.html">Home</a>
+                    <a href="./sitemap.html">Sitemap</a>
+                </div>
+            </div>
+            <main>
+                <h1><span class="bounce-underlined">My Public Projects!</span></h1>
+                <div class="innerblock">
+                    <h3 class="blocktitle">Public GitHub Repositories.</h3>
+                    <ul id="githubrepos">
+
+                    </ul>
+                </div>
+            </main>
+        </div>
+        <script>
+          async function loadGitHubRepos(username) {
+            const repoList = document.getElementById("githubrepos");
+            if (!repoList) return console.error("No #githubrepos element found.");
+
+            try {
+              const response = await fetch(`https://api.github.com/users/${username}/repos`);
+              if (!response.ok) throw new Error("GitHub API request failed");
+            
+              const repos = await response.json();
+            
+              repos.forEach(repo => {
+                const li = document.createElement("li");
+
+                const a = document.createElement("a");
+                a.href = repo.html_url;
+                a.textContent = repo.name;
+                a.target = "_blank";
+                a.style.fontWeight = "bold";
+
+                const desc = document.createElement("p");
+                desc.textContent = repo.description || "No description.";
+                desc.style.margin = "4px 0 10px 0";
+                desc.style.fontSize = "0.9em";
+                desc.style.color = "#555";
+
+                li.appendChild(a);
+                li.appendChild(desc);
+                repoList.appendChild(li);
+              });
+          
+            } catch (error) {
+              console.error("Error loading GitHub repos:", error);
+              repoList.innerHTML = "<li>Failed to load repositories.</li>";
+            }
+          }
+      
+          loadGitHubRepos("samsucksatcoding");
+        </script>
+    </body>
+</html>
