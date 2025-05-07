@@ -1,15 +1,15 @@
 body {
     margin: 0;
     height: 100vh;
-    background-color: #111;  /* Dark background like terminal */
+    background-color: #111;
     background-image: 
-      linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px), /* Vertical grid */
-      linear-gradient(180deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px); /* Horizontal grid */
-    background-size: 30px 30px;  /* Grid cell size */
+      linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 30px 30px;
     background-attachment: fixed;
     transition: background-position 0.1s ease-out;
-    color: #fff;  /* Text color for a terminal-like look */
-    font-family: monospace;  /* Monospace font for the terminal appearance */
+    color: #fff;
+    font-family: monospace;
     font-size: 15px;
     display: flex;
     user-select: none;
