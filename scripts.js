@@ -14,16 +14,20 @@ const text = h1.textContent;
 h1.innerHTML = [...text].map(char =>
   `<span>${char === ' ' ? '&nbsp;' : char}</span>`).join('');
 /* Copy Paste */
-  document.querySelector('.copypaste').addEventListener('click', function() {
+const copyButton = document.querySelector('.copypaste');
+if (copyButton) {
+  copyButton.addEventListener('click', function () {
     const textarea = document.querySelector('textarea');
+    if (!textarea) return;
     textarea.select();
     textarea.setSelectionRange(0, 99999);
     document.execCommand('copy');
     this.textContent = 'Copied! ✅';
     setTimeout(() => {
-        this.textContent = 'Copy 📋';
+      this.textContent = 'Copy 📋';
     }, 2000);
-});
+  });
+}
 /* Typewriter Effect */
 const words = ["Beautiful", "Lovely", "Gorgeous", "Stunning", "Elegant", "Exquisite", "Divine", "Radiant", "Alluring", "Enchanting", 
   "Graceful", "Ravishing", "Angelic", "Heavenly", "Fair", "Winsome", "Ethereal", "Seraphic", "Cute", "Adorable", "Charming", "Sweet", 
@@ -44,20 +48,46 @@ function type() {
 
   if (!isDeleting && charIndex < currentWord.length) {
     charIndex++;
-    setTimeout(type, 100); // typing speed
+    setTimeout(type, 135);
   } else if (isDeleting && charIndex > 0) {
     charIndex--;
-    setTimeout(type, 50); // deleting speed
+    setTimeout(type, 135);
   } else {
     if (!isDeleting) {
       isDeleting = true;
-      setTimeout(type, 1000); // pause before deleting
+      setTimeout(type, 1000);
     } else {
       isDeleting = false;
       wordIndex = (wordIndex + 1) % words.length;
-      setTimeout(type, 500); // pause before typing next word
+      setTimeout(type, 500);
     }
   }
 }
 
 type();
+
+/* On Lost Focus Retitle Page */
+const quotes = [
+  "COME BACK!!",
+  "I LOVE YOU!",
+  "I CAN GIVE YOU COOKIES!",
+  "I MISS YOU!"
+];
+
+const originalTitle = document.title;
+let titleInterval = null;
+
+function showRandomTitle() {
+  const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+  document.title = randomQuote;
+}
+
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    showRandomTitle();
+    titleInterval = setInterval(showRandomTitle, 5000);
+  } else {
+    clearInterval(titleInterval);
+    document.title = originalTitle;
+  }
+});

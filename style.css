@@ -201,6 +201,11 @@ button.copypaste:hover {
     margin: 15px;
     position: relative;
 }
+.innerblock p {
+    margin-left: auto;
+    margin-right: auto;
+    line-break: normal;
+}
 .innerblock:hover {
     backdrop-filter: blur(15px);
     transform: scale(1.01);
