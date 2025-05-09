@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Discord Server Widget</title>
+  <style>
+    .invisible{
+      color: #ffffff00;
+    }
+    /* Base page styles */
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background-color: #111;
+      background-image:
+        linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size: 30px 30px;
+      background-attachment: fixed;
+      transition: background-position 0.1s ease-out;
+      color: #fff;
+      font-family: monospace;
+      font-size: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    /* Widget container */
+    .widget {
+      width: 350px;
+      max-height: 80vh;
+      overflow: auto;
+      backdrop-filter: blur(5px);
+      background-color: rgba(0,0,0,0.4);
+      border: 2px solid #333;
+      border-radius: 10px;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Header */
+    .widget-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px;
+      border-bottom: 2px solid #333;
+      backdrop-filter: blur(10px);
+      background-color: rgba(0,0,0,0.05);
+    }
+    .widget-header h2 {
+      margin: 0;
+      font-size: 18px;
+      color: #fff;
+    }
+    .widget-header .count {
+      font-size: 14px;
+      color: #4955ff;
+    }
+
+    /* Section titles */
+    .widget-section {
+      padding: 10px 15px 5px;
+      font-weight: bold;
+      color: #aaa;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    /* Channels list */
+    .channels, .members {
+      list-style: none;
+      margin: 0;
+      padding: 0 15px 10px;
+    }
+    .channels li, .members li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .channels li::before {
+      content: "#";
+      color: #4955ff;
+      font-weight: bold;
+    }
+
+    /* Member avatars */
+    .members li img {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      object-fit: cover;
+      filter: drop-shadow(0 0 3px rgba(0,0,0,0.5));
+    }
+    .members li .name {
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .members li .status {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #43b581; /* online green */
+      border: 1px solid #111;
+    }
+
+    /* Links inside widget */
+    a {
+      color: #4955ff;
+      font-weight: bold;
+      text-decoration: none;
+      position: relative;
+    }
+    a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background-color: currentColor;
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+    a:hover::after {
+      width: 100%;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="widget">
+    <div class="widget-header">
+      <h2 id="guild-name">Loading…</h2>
+      <span class="count" id="presence-count">0 online</span>
+    </div>
+
+    <div>
+      <div class="widget-section">Channels</div>
+      <ul class="channels" id="channels-list">
+        <!-- populated by JS -->
+      </ul>
+    </div>
+
+    <div>
+      <div class="widget-section">Online Members</div>
+      <ul class="members" id="members-list">
+        <!-- populated by JS -->
+      </ul>
+    </div>
+    <p><hr><span class="invisible">..-</span>Join at <a href="https://discord.gg/5T8p48nPrG">https://discord.gg/5T8p48nPrG</a></p>
+  </div>
+  <script>
+    fetch('https://discord.com/api/guilds/1370189603365191765/widget.json')
+      .then(res => {
+        if (!res.ok) throw new Error('Network response was not ok');
+        return res.json();
+      })
+      .then(data => {
+        // Header
+        document.getElementById('guild-name').textContent = data.name;
+        document.getElementById('presence-count').textContent = data.presence_count + ' online';
+
+        // Channels
+        const chList = document.getElementById('channels-list');
+        data.channels.forEach(ch => {
+          const li = document.createElement('li');
+          li.textContent = ch.name;
+          chList.appendChild(li);
+        });
+
+        // Members
+        const mList = document.getElementById('members-list');
+        data.members.forEach(m => {
+          const li = document.createElement('li');
+
+          const img = document.createElement('img');
+          img.src = m.avatar_url || `https://cdn.discordapp.com/embed/avatars/${m.discriminator % 5}.png`;
+          img.alt = m.username;
+          li.appendChild(img);
+
+          const nameSpan = document.createElement('span');
+          nameSpan.className = 'name';
+          nameSpan.textContent = m.username;
+          li.appendChild(nameSpan);
+
+          const statusDot = document.createElement('span');
+          statusDot.className = 'status';
+          // you could switch color by m.status if you want dnd/idle/offline etc.
+          li.appendChild(statusDot);
+
+          mList.appendChild(li);
+        });
+      })
+      .catch(err => {
+        document.querySelector('.widget').textContent = 'Failed to load widget.';
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
